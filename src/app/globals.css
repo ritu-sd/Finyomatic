@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+:root {
+  /* Background colors */
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Header colors */
+  --header-bg: #ffffff;
+  --header-border: #f3f4f6;
+  
+  /* Logo colors */
+  --logo-bg: #000000;
+  --logo-text: #ffffff;
+  --logo-line: #000000;
+  
+  /* Navigation colors */
+  --nav-text: #000000;
+  --nav-hover: #4b5563;
+  
+  /* Button colors */
+  --btn-primary-bg: #000000;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #1f2937;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: #000000;
+  --btn-secondary-hover: #4b5563;
+  
+  /* Mobile menu colors */
+  --mobile-bg: #ffffff;
+  --mobile-border: #f3f4f6;
+  --mobile-hover: #f9fafb;
+  
+  /* Text colors */
+  --text-primary: #000000;
+  --text-secondary: #ffffff;
+  --text-muted: #6b7280;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* CSS Classes for Colors */
+.header-bg { background-color: var(--header-bg); }
+.header-border { border-color: var(--header-border); }
+.logo-bg { background-color: var(--logo-bg); }
+.logo-text { color: var(--logo-text); }
+.logo-line { background-color: var(--logo-line); }
+.nav-text { color: var(--nav-text); }
+.nav-hover:hover { color: var(--nav-hover); }
+.btn-primary { 
+  background-color: var(--btn-primary-bg); 
+  color: var(--btn-primary-text); 
+}
+.btn-primary:hover { background-color: var(--btn-primary-hover); }
+.btn-secondary { 
+  background-color: var(--btn-secondary-bg); 
+  color: var(--btn-secondary-text); 
+}
+.btn-secondary:hover { color: var(--btn-secondary-hover); }
+.mobile-bg { background-color: var(--mobile-bg); }
+.mobile-border { border-color: var(--mobile-border); }
+.mobile-hover:hover { background-color: var(--mobile-hover); }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    
+    /* Dark mode header colors */
+    --header-bg: #111827;
+    --header-border: #374151;
+    
+    /* Dark mode logo colors */
+    --logo-bg: #ffffff;
+    --logo-text: #000000;
+    --logo-line: #ffffff;
+    
+    /* Dark mode navigation colors */
+    --nav-text: #ffffff;
+    --nav-hover: #d1d5db;
+    
+    /* Dark mode button colors */
+    --btn-primary-bg: #ffffff;
+    --btn-primary-text: #000000;
+    --btn-primary-hover: #e5e7eb;
+    --btn-secondary-bg: transparent;
+    --btn-secondary-text: #ffffff;
+    --btn-secondary-hover: #d1d5db;
+    
+    /* Dark mode mobile menu colors */
+    --mobile-bg: #1f2937;
+    --mobile-border: #374151;
+    --mobile-hover: #374151;
+    
+    /* Dark mode text colors */
+    --text-primary: #ffffff;
+    --text-secondary: #000000;
+    --text-muted: #9ca3af;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
