@@ -1,11 +1,11 @@
-const {
+import {
   pgTable,
   text,
   integer,
   boolean,
   primaryKey,
-} = require("drizzle-orm/pg-core");
-const { users } = require("./users");
+} from "drizzle-orm/pg-core";
+import { users } from "./users.js";
 
 export const authenticators = pgTable(
   "authenticator",

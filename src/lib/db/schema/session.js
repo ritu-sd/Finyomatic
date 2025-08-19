@@ -1,5 +1,5 @@
-const { pgTable, text, timestamp } = require("drizzle-orm/pg-core");
-const { users } = require("./users");
+import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { users } from "./users.js";
 
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").primaryKey(),

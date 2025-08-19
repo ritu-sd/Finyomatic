@@ -1,5 +1,5 @@
-const { integer, pgTable, text, primaryKey } = require("drizzle-orm/pg-core");
-const { users } = require("./users");
+import { integer, pgTable, text, primaryKey } from "drizzle-orm/pg-core";
+import { users } from "./users.js";
 
 export const accounts = pgTable(
   "account",

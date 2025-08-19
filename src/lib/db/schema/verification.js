@@ -1,4 +1,4 @@
-const { pgTable, text, timestamp, primaryKey } = require("drizzle-orm/pg-core");
+import { pgTable, text, timestamp, primaryKey } from "drizzle-orm/pg-core";
 
 export const verificationTokens = pgTable(
   "verificationToken",
