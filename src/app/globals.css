@@ -66,6 +66,30 @@
 .mobile-border { border-color: var(--mobile-border); }
 .mobile-hover:hover { background-color: var(--mobile-hover); }
 
+/* React Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  position: relative;
+  background: transparent;
+  border: none;
+  outline: none;
+  max-width: 500px;
+  width: 100%;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
