@@ -1,12 +1,29 @@
+import {
+  pgTable,
+  text,
+  integer,
+  numeric,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
+import { users } from "./users.js";
+
 export const items = pgTable("items", {
-  id: serial("id").primaryKey(),
-  orgId: integer("org_id").notNull(),
-  name: varchar("name", 200).notNull(),
-  sku: varchar("sku", 64),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  item_description: text("item_description").notNull(),
   hsnSac: varchar("hsn_sac", 16),
-  uom: varchar("uom", 16),
-  defaultPrice: numeric("default_price", { precision: 18, scale: 2 }).default(
-    "0"
-  ),
-  taxInclusive: boolean("tax_inclusive").default(false),
+  quantity: integer("quantity").notNull(),
+  unit: varchar("unit", 16),
+  rate: numeric("rate", { precision: 18, scale: 2 }).default("0"),
+  discount: numeric("discount", { precision: 18, scale: 2 }).default("0"),
+  tax_rate: numeric("tax_rate", { precision: 18, scale: 2 }).default("0"),
+  tax_amount: numeric("tax_amount", { precision: 18, scale: 2 }).default("0"),
+  total: numeric("total", { precision: 18, scale: 2 }).default("0"),
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp().notNull().defaultNow(),
 });

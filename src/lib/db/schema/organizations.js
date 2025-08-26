@@ -1,5 +1,13 @@
+import { pgTable, text, varchar, timestamp } from "drizzle-orm/pg-core";
+import { users } from "./users.js";
+
 export const organizations = pgTable("organizations", {
-  id: serial("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   name: varchar("name", 200).notNull(),
   email: varchar("email", 200),
   phone: varchar("phone", 40),
@@ -14,8 +22,6 @@ export const organizations = pgTable("organizations", {
   addressLine2: varchar("address_line2", 200),
 
   currency: varchar("currency", 3).notNull().default("INR"),
-  tz: varchar("timezone", 64).default("Asia/Kolkata"),
-
   logoUrl: varchar("logo_url", 400),
 
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),

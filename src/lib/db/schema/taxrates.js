@@ -1,3 +1,12 @@
+import {
+  pgTable,
+  text,
+  integer,
+  boolean,
+  primaryKey,
+} from "drizzle-orm/pg-core";
+import { users } from "./users.js";
+
 export const taxRates = pgTable("tax_rates", {
   id: serial("id").primaryKey(),
   orgId: integer("org_id").notNull(),
