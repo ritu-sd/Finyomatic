@@ -11,7 +11,6 @@ export const organizations = pgTable("organizations", {
   name: varchar("name", 200).notNull(),
   email: varchar("email", 200),
   phone: varchar("phone", 40),
-
   gstin: varchar("gstin", 20),
   pan: varchar("pan", 20),
   country: varchar("country", 2).notNull(),
@@ -20,10 +19,8 @@ export const organizations = pgTable("organizations", {
   postalCode: varchar("postal_code", 16),
   addressLine1: varchar("address_line1", 200),
   addressLine2: varchar("address_line2", 200),
-
   currency: varchar("currency", 3).notNull().default("INR"),
   logoUrl: varchar("logo_url", 400),
-
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });
