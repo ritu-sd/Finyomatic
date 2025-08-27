@@ -22,7 +22,12 @@ export const items = pgTable("items", {
   rate: numeric("rate", { precision: 18, scale: 2 }).default("0"),
   discount_type: varchar("discount_type", 16).default("percentage"),
   discount: numeric("discount", { precision: 18, scale: 2 }).default("0"),
-  tax_type: varchar("tax_type", 16).default("gst"), //gst/cgst/sgst/igst/cess/vat/none
+  discount_amount: decimal("discount_amount", {
+    precision: 15,
+    scale: 2,
+  }).notNull(),
+  tax_type: pgEnum("tax_type", ["tax", "gst"]), // 'tax' or 'gst'
+  //gst/cgst/sgst/igst/cess/vat/none
   tax_rate: numeric("tax_rate", { precision: 18, scale: 2 }).default("0"),
   tax_amount: numeric("tax_amount", { precision: 18, scale: 2 }).default("0"),
   total: numeric("total", { precision: 18, scale: 2 }).default("0"),
