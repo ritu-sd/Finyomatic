@@ -11,6 +11,7 @@ export const organizations = pgTable("organizations", {
   name: varchar("name", 200).notNull(),
   email: varchar("email", 200),
   phone: varchar("phone", 40),
+  // tax number
   gstin: varchar("gstin", 20),
   pan: varchar("pan", 20),
   country: varchar("country", 2).notNull(),
