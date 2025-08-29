@@ -2,7 +2,7 @@ import { pgTable, text, varchar, timestamp } from "drizzle-orm/pg-core";
 import { users } from "./users.js";
 
 export const organizations = pgTable("organizations", {
-  userId: text("userId")
+  user_id: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   id: text("id")
@@ -17,11 +17,11 @@ export const organizations = pgTable("organizations", {
   country: varchar("country", 2).notNull(),
   state: varchar("state", 64),
   city: varchar("city", 128),
-  postalCode: varchar("postal_code", 16),
-  addressLine1: varchar("address_line1", 200),
-  addressLine2: varchar("address_line2", 200),
+  postal_code: varchar("postal_code", 16),
+  address_line1: varchar("address_line1", 200),
+  address_line2: varchar("address_line2", 200),
   currency: varchar("currency", 3).notNull().default("INR"),
-  logoUrl: varchar("logo_url", 400),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+  logo_url: varchar("logo_url", 400),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  updated_at: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });

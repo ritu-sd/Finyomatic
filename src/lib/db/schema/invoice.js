@@ -9,7 +9,6 @@ const {
   jsonb,
 } = require("drizzle-orm/pg-core");
 const { users } = require("./user");
-const { customers } = require("./customer");
 
 export const invoices = pgTable("invoice", {
   user_id: text("user_id")
@@ -33,9 +32,6 @@ export const invoices = pgTable("invoice", {
   }),
 
   type: text("type").default("invoice"),
-
-  items: jsonb("items").notNull().default([]),
-
   discount: decimal("discount", { precision: 15, scale: 2 }).default("0.00"),
   discount_type: text("discount_type").default("percentage"),
   discount_hidden: boolean("discount_hidden").default(false),
@@ -47,14 +43,22 @@ export const invoices = pgTable("invoice", {
   total: decimal("total", { precision: 15, scale: 2 }).notNull(),
 
   currency: text("currency").default("INR"),
-  selected_tax_type: pgEnum("selected_tax_type", ["tax", "gst"]), // 'tax' or 'gst'
+  tax_type: pgEnum("tax_type", ["tax", "gst"]), // 'tax' or 'gst'
   gst_type: pgEnum("gst_type", ["cgst_sgst", "igst"]), // 'cgst_sgst' or 'igst'
   // template table reference
   selected_template: text("selected_template").default("classic_template"), //
   //enum: draft, sent, paid, cancelled
   status: pgEnum("status", ["draft", "sent", "paid", "cancelled"]),
   // organization
+  organizations_id: text("organizations_id").references(
+    () => organizations.id,
+    { onDelete: "set null" }
+  ),
   // customer
+
+  clients_id: text("clients_id").references(() => clients.id, {
+    onDelete: "set null",
+  }),
 
   notes: text("notes"),
   due_date: timestamp("due_date"),
