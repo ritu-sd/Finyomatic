@@ -3,10 +3,15 @@ import {
   text,
   integer,
   numeric,
+  decimal,
   timestamp,
   varchar,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 import { invoices } from "./invoice.js";
+
+// Define enum separately
+export const itemTaxTypeEnum = pgEnum("item_tax_type", ["tax", "gst"]);
 
 export const items = pgTable("items", {
   invoice_id: text("invoice_id")
@@ -26,7 +31,7 @@ export const items = pgTable("items", {
     precision: 15,
     scale: 2,
   }).notNull(),
-  tax_type: pgEnum("tax_type", ["tax", "gst"]), // 'tax' or 'gst'
+  tax_type: itemTaxTypeEnum("tax_type"), // 'tax' or 'gst'
   //gst/cgst/sgst/igst/cess/vat/none
   tax_rate: numeric("tax_rate", { precision: 18, scale: 2 }).default("0"),
   tax_amount: numeric("tax_amount", { precision: 18, scale: 2 }).default("0"),

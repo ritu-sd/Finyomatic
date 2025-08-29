@@ -1,5 +1,6 @@
-const {
+import {
   pgTable,
+  pgEnum,
   text,
   primaryKey,
   timestamp,
@@ -7,8 +8,20 @@ const {
   integer,
   boolean,
   jsonb,
-} = require("drizzle-orm/pg-core");
-const { users } = require("./user");
+} from "drizzle-orm/pg-core";
+import { users } from "./users.js";
+import { clients } from "./clients.js";
+import { organizations } from "./organizations.js";
+
+// Define enums separately
+export const taxTypeEnum = pgEnum("tax_type", ["tax", "gst"]);
+export const gstTypeEnum = pgEnum("gst_type", ["cgst_sgst", "igst"]);
+export const statusEnum = pgEnum("status", [
+  "draft",
+  "sent",
+  "paid",
+  "cancelled",
+]);
 
 export const invoices = pgTable("invoice", {
   user_id: text("user_id")
@@ -43,12 +56,12 @@ export const invoices = pgTable("invoice", {
   total: decimal("total", { precision: 15, scale: 2 }).notNull(),
 
   currency: text("currency").default("INR"),
-  tax_type: pgEnum("tax_type", ["tax", "gst"]), // 'tax' or 'gst'
-  gst_type: pgEnum("gst_type", ["cgst_sgst", "igst"]), // 'cgst_sgst' or 'igst'
+  tax_type: taxTypeEnum("tax_type"), // 'tax' or 'gst'
+  gst_type: gstTypeEnum("gst_type"), // 'cgst_sgst' or 'igst'
   // template table reference
   selected_template: text("selected_template").default("classic_template"), //
   //enum: draft, sent, paid, cancelled
-  status: pgEnum("status", ["draft", "sent", "paid", "cancelled"]),
+  status: statusEnum("status"),
   // organization
   organizations_id: text("organizations_id").references(
     () => organizations.id,
