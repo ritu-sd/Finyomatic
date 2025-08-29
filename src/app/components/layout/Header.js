@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { IBM_Plex_Sans } from "next/font/google";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Modal from "react-modal";
+import { useSession } from "next-auth/react";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -62,6 +63,11 @@ const Header = () => {
       password: "",
       confirmPassword: "",
     });
+  };
+  const onClickSignout = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    signOut("google");
   };
 
   const handleInputChange = (e) => {
@@ -221,6 +227,8 @@ const Header = () => {
     { name: "Help", href: "#designs" },
   ];
 
+  const session = useSession();
+
   return (
     <>
       <header className="sticky top-0 z-50 header-bg border-b header-border">
@@ -252,18 +260,43 @@ const Header = () => {
 
             {/* Right Side - Auth Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <button
+              {/* <button
                 className={`font-medium text-sm tracking-wide transition-colors duration-300 px-4 py-2 btn-secondary ${ibmPlexSans.className}`}
                 onClick={() => openAuthModal(true)}
               >
                 Log In
-              </button>
-              <button
-                className={`font-medium text-sm tracking-wide px-6 py-2.5 rounded-sm transition-colors duration-300 btn-primary ${ibmPlexSans.className}`}
-                onClick={() => openAuthModal(false)}
-              >
-                Sign Up
-              </button>
+              </button> */}
+              {!session?.data?.user && (
+                <button
+                  className={`font-medium text-sm tracking-wide px-4 py-2.5 rounded-sm transition-colors duration-300 btn-primary ${ibmPlexSans.className}`}
+                  onClick={() => openAuthModal(false)}
+                >
+                  Log In / Sign Up
+                </button>
+              )}
+
+              {session?.data?.user ? (
+                <div className="flex items-center gap-3">
+                  {/* <span className="text-sm font-medium text-gray-700">
+                    {session.data.user.name || session.data.user.email}
+                  </span> */}
+                  <button
+                    className={`font-medium text-sm tracking-wide px-4 py-2.5 rounded-sm transition-colors duration-300 btn-primary ${ibmPlexSans.className}`}
+                    onClick={onClickSignout}
+                  >
+                    <span>Logout</span>
+                  </button>
+                </div>
+              ) : (
+                session?.status === "authenticated" && (
+                  <button
+                    className="btn bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 border-none text-white w-full min-h-[36px] text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                    onClick={onClickSignout}
+                  >
+                    <span>Logout</span>
+                  </button>
+                )
+              )}
             </div>
 
             {/* Mobile menu button */}
@@ -313,18 +346,20 @@ const Header = () => {
                   </a>
                 ))}
                 <div className="pt-4 pb-2 space-y-2">
-                  <button
+                  {/* <button
                     className={`w-full font-medium text-base py-2 rounded-md transition-colors duration-200 btn-secondary mobile-hover ${ibmPlexSans.className}`}
                     onClick={() => openAuthModal(true)}
                   >
                     Log In
-                  </button>
-                  <button
-                    className={`w-full font-medium text-base py-2 rounded-md transition-colors duration-200 btn-primary ${ibmPlexSans.className}`}
-                    onClick={() => openAuthModal(false)}
-                  >
-                    Sign Up
-                  </button>
+                  </button> */}
+                  {!session?.data?.user && (
+                    <button
+                      className={`w-full font-medium text-base py-2 rounded-md transition-colors duration-200 btn-primary ${ibmPlexSans.className}`}
+                      onClick={() => openAuthModal(false)}
+                    >
+                      Log in/Sign up
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
