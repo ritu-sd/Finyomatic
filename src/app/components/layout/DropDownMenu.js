@@ -83,7 +83,7 @@ export const DropDownMenu = () => {
   }
 
   return (
-    <details className="dropdown dropdown-bottom" ref={ref}>
+    <details className="dropdown dropdown-bottom relative" ref={ref}>
       <summary
         role="button"
         className="flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 hover:border-blue-300 rounded-2xl py-3 px-3 sm:px-4 cursor-pointer select-none min-h-[40px] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
@@ -116,7 +116,7 @@ export const DropDownMenu = () => {
           <ChevronDown className="w-4 h-4 flex-shrink-0 text-gray-500 transition-transform duration-200 group-hover:rotate-180" />
         </div>
       </summary>
-      <ul className="menu dropdown-content bg-white/95 backdrop-blur-xl rounded-xl z-50 w-56 sm:w-64 p-2 shadow-2xl border border-gray-200/50 mt-2 left-1/2 transform -translate-x-1/2 relative">
+      <ul className="menu dropdown-content bg-white/95 backdrop-blur-xl rounded-xl z-50 w-56 sm:w-64 p-2 shadow-2xl border border-gray-200/50 mt-2 absolute top-full left-0">
         {/* User info header for mobile */}
         <li className="block sm:hidden mb-2">
           <div className="flex items-center gap-2 py-2 px-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg pointer-events-none border border-blue-100">

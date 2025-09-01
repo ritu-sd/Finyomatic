@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { IBM_Plex_Sans } from "next/font/google";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Modal from "react-modal";
 import { useSession } from "next-auth/react";
@@ -65,11 +65,7 @@ const Header = () => {
       confirmPassword: "",
     });
   };
-  const onClickSignout = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    signOut("google");
-  };
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -281,12 +277,7 @@ const Header = () => {
                   {/* <span className="text-sm font-medium text-gray-700">
                     {session.data.user.name || session.data.user.email}
                   </span> */}
-                  <button
-                    className={`font-medium text-sm tracking-wide px-4 py-2.5 rounded-sm transition-colors duration-300 btn-primary ${ibmPlexSans.className}`}
-                    onClick={onClickSignout}
-                  >
-                    <DropDownMenu />
-                  </button>
+                  <DropDownMenu />
                 </div>
               )}
             </div>
