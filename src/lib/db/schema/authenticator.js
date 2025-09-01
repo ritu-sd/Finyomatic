@@ -19,7 +19,7 @@ export const authenticators = pgTable(
     counter: integer("counter").notNull(),
     credentialDeviceType: text("credentialDeviceType").notNull(),
     credentialBackedUp: boolean("credentialBackedUp").notNull(),
-    transports: text("transports"),
+    transports: text("transports").array(),
   },
   (authenticator) => [
     {
