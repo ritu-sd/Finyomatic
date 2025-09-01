@@ -6,6 +6,7 @@ import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Modal from "react-modal";
 import { useSession } from "next-auth/react";
+import { DropDownMenu } from "./DropDownMenu";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -275,7 +276,7 @@ const Header = () => {
                 </button>
               )}
 
-              {session?.data?.user ? (
+              {session?.data?.user && (
                 <div className="flex items-center gap-3">
                   {/* <span className="text-sm font-medium text-gray-700">
                     {session.data.user.name || session.data.user.email}
@@ -284,18 +285,9 @@ const Header = () => {
                     className={`font-medium text-sm tracking-wide px-4 py-2.5 rounded-sm transition-colors duration-300 btn-primary ${ibmPlexSans.className}`}
                     onClick={onClickSignout}
                   >
-                    <span>Logout</span>
+                    <DropDownMenu />
                   </button>
                 </div>
-              ) : (
-                session?.status === "authenticated" && (
-                  <button
-                    className="btn bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 border-none text-white w-full min-h-[36px] text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-                    onClick={onClickSignout}
-                  >
-                    <span>Logout</span>
-                  </button>
-                )
               )}
             </div>
 
