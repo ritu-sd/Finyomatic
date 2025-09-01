@@ -50,10 +50,9 @@ export const DropDownMenu = () => {
   const getMenuItemClasses = (route) => {
     const baseClasses =
       "flex items-center gap-2 py-2 px-3 min-h-[40px] rounded-lg transition-all duration-200 group";
-    const activeClasses =
-      "bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-md";
+    const activeClasses = "bg-black text-white font-semibold shadow-md";
     const inactiveClasses =
-      "hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 active:bg-blue-100 text-gray-700 hover:text-gray-800 border border-transparent hover:border-blue-200";
+      "hover:bg-gray-100 active:bg-gray-200 text-gray-700 hover:text-gray-800 border border-transparent hover:border-gray-200";
 
     return isActiveRoute(route)
       ? `${baseClasses} ${activeClasses}`
@@ -62,8 +61,8 @@ export const DropDownMenu = () => {
 
   if (session?.status === "loading") {
     return (
-      <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl py-3 px-4 min-h-[48px] shadow-lg">
-        <div className="loading loading-spinner loading-sm text-blue-500"></div>
+      <div className="flex items-center justify-center gap-3 bg-gray-100 border border-gray-200 rounded-2xl py-3 px-4 min-h-[48px] shadow-lg">
+        <div className="loading loading-spinner loading-sm text-gray-600"></div>
         <span className="text-sm sm:text-base text-gray-700 font-medium">
           Loading...
         </span>
@@ -71,17 +70,16 @@ export const DropDownMenu = () => {
     );
   }
 
-
   return (
-    <details className="dropdown dropdown-bottom" ref={ref}>
+    <details className="dropdown dropdown-bottom dropdown-end" ref={ref}>
       <summary
         role="button"
-        className="flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 hover:border-blue-300 rounded-2xl py-3 px-3 sm:px-4 cursor-pointer select-none min-h-[40px] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+        className="flex items-center justify-center gap-2 sm:gap-3 bg-gray-100 hover:bg-gray-200 border border-gray-200 hover:border-gray-300 rounded-2xl py-3 px-3 sm:px-4 cursor-pointer select-none min-h-[40px] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
       >
         <div className="flex-shrink-0">
           {session.data.user && session.data.user.image && !imageLoadError ? (
             <div className="avatar">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full ring-2 ring-blue-200 ring-offset-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full ring-2 ring-gray-200 ring-offset-2">
                 <img
                   src={session.data.user.image}
                   alt="User Avatar"
@@ -92,7 +90,7 @@ export const DropDownMenu = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 ring-2 ring-blue-200 ring-offset-2">
+            <div className="bg-black text-white w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 ring-2 ring-gray-200 ring-offset-2">
               <span className="text-xs sm:text-sm font-semibold">
                 {getUserInitials()}
               </span>
@@ -106,16 +104,16 @@ export const DropDownMenu = () => {
           <ChevronDown className="w-4 h-4 flex-shrink-0 text-gray-500 transition-transform duration-200 group-hover:rotate-180" />
         </div>
       </summary>
-      <ul className="menu dropdown-content bg-white/95 backdrop-blur-xl rounded-xl z-50 w-56 sm:w-64 p-2 shadow-2xl border border-gray-200/50 mt-2 left-1/2 transform -translate-x-1/2 relative">
+      <ul className="menu dropdown-content bg-white rounded-xl z-[60] w-56 sm:w-64 p-2 shadow-2xl border border-gray-200 mt-3 left-1/2 transform -translate-x-1/2 relative">
         {/* User info header for mobile */}
         <li className="block sm:hidden mb-2">
-          <div className="flex items-center gap-2 py-2 px-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg pointer-events-none border border-blue-100">
+          <div className="flex items-center gap-2 py-2 px-3 bg-gray-100 rounded-lg pointer-events-none border border-gray-200">
             <div className="flex-shrink-0">
               {session.data.user &&
               session.data.user.image &&
               !imageLoadError ? (
                 <div className="avatar">
-                  <div className="w-8 h-8 rounded-full ring-1 ring-blue-200">
+                  <div className="w-8 h-8 rounded-full ring-1 ring-gray-200">
                     <img
                       src={session.data.user.image}
                       alt="User Avatar"
@@ -124,7 +122,7 @@ export const DropDownMenu = () => {
                   </div>
                 </div>
               ) : (
-                <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center ring-1 ring-blue-200">
+                <div className="bg-black text-white w-8 h-8 rounded-full flex items-center justify-center ring-1 ring-gray-200">
                   <span className="text-xs font-semibold">
                     {getUserInitials()}
                   </span>
@@ -185,7 +183,7 @@ export const DropDownMenu = () => {
 
         <li>
           <button
-            className="btn bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 border-none text-white w-full min-h-[36px] text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+            className="btn bg-black hover:bg-gray-800 border-none text-white w-full min-h-[36px] text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             onClick={onClickSignout}
           >
             <span>Logout</span>
