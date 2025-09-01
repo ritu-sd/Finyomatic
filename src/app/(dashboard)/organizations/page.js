@@ -2,8 +2,9 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { OrganizationsList } from "@/src/app/components/organizations/OrganizationsList";
 
-export default function Profiles() {
+export default function Organizations() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -24,5 +25,9 @@ export default function Profiles() {
     return null;
   }
 
-  return <main>organizations</main>;
+  return (
+    <main>
+      <OrganizationsList />
+    </main>
+  );
 }

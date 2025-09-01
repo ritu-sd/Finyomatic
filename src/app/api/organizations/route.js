@@ -14,11 +14,11 @@ export async function GET(req, res) {
   const search = searchParams.get("search");
 
   // Build where conditions
-  let whereConditions = eq(organizations.userId, session.user.id);
+  let whereConditions = eq(organizations.user_id, session.user.id);
 
   if (search && search.trim()) {
     whereConditions = and(
-      eq(organizations.userId, session.user.id),
+      eq(organizations.user_id, session.user.id),
       ilike(organizations.name, `%${search.trim()}%`)
     );
   }
@@ -29,7 +29,7 @@ export async function GET(req, res) {
     .select()
     .from(organizations)
     .where(whereConditions)
-    .orderBy(asc(organizations.createdAt))
+    .orderBy(asc(organizations.created_at))
     .offset((page - 1) * limit)
     .limit(limit);
 
@@ -60,11 +60,11 @@ export async function POST(req, res) {
     country,
     state,
     city,
-    postalCode,
-    addressLine1,
-    addressLine2,
+    postal_code,
+    address_line1,
+    address_line2,
     currency,
-    logoUrl,
+    logo_url,
   } = body;
 
   if (!name || !phone || !email) {
@@ -80,7 +80,7 @@ export async function POST(req, res) {
     .from(organizations)
     .where(
       and(
-        eq(organizations.userId, session.user.id),
+        eq(organizations.user_id, session.user.id),
         eq(organizations.name, name.trim())
       )
     )
@@ -102,12 +102,12 @@ export async function POST(req, res) {
     country,
     state,
     city,
-    postalCode,
-    addressLine1,
-    addressLine2,
+    postal_code,
+    address_line1,
+    address_line2,
     currency,
-    logoUrl,
-    userId: session.user.id,
+    logo_url,
+    user_id: session.user.id,
   };
 
   try {
@@ -138,11 +138,11 @@ export async function PUT(req, res) {
     country,
     state,
     city,
-    postalCode,
-    addressLine1,
-    addressLine2,
+    postal_code,
+    address_line1,
+    address_line2,
     currency,
-    logoUrl,
+    logo_url,
   } = body;
   if (!id || !name || !phone || !email) {
     return Response.json(
@@ -157,7 +157,7 @@ export async function PUT(req, res) {
     .from(organizations)
     .where(
       and(
-        eq(organizations.userId, session.user.id),
+        eq(organizations.user_id, session.user.id),
         eq(organizations.name, name.trim()),
         ne(organizations.id, id)
       )
@@ -180,12 +180,11 @@ export async function PUT(req, res) {
     country,
     state,
     city,
-    address,
-    postalCode,
-    addressLine1,
-    addressLine2,
+    postal_code,
+    address_line1,
+    address_line2,
     currency,
-    logoUrl,
+    logo_url,
   };
   const client = await db
     .update(organizations)
@@ -206,7 +205,9 @@ export async function DELETE(req, res) {
 
   const client = await db
     .delete(organizations)
-    .where(and(eq(organizations.id, id), eq(organizations.userId, session.user.id)))
+    .where(
+      and(eq(organizations.id, id), eq(organizations.user_id, session.user.id))
+    )
     .returning();
 
   return Response.json(client[0], { status: 200 });
