@@ -142,12 +142,12 @@ export const DropDownMenu = () => {
 
         <li className="mb-1">
           <Link
-            href="/profiles"
-            className={getMenuItemClasses("/profiles")}
+            href="/organizations"
+            className={getMenuItemClasses("/organizations")}
             onClick={closeDropdown}
           >
             <CircleUserRound className="w-4 h-4 flex-shrink-0 group-hover:scale-110 transition-transform duration-200" />
-            <span className="font-medium text-sm">My Profiles</span>
+            <span className="font-medium text-sm">My Organizations</span>
           </Link>
         </li>
         <li className="mb-1">

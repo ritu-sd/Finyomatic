@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { ClientsList } from "@/src/app/components/clients/ClientsList";
 
 export default function Clients() {
   const { data: session, status } = useSession();
@@ -24,5 +25,9 @@ export default function Clients() {
     return null;
   }
 
-  return <main>Clients</main>;
+  return (
+    <main>
+      <ClientsList />
+    </main>
+  );
 }
