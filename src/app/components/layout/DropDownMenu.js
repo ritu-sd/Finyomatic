@@ -27,10 +27,10 @@ export const DropDownMenu = () => {
     ref.current?.removeAttribute("open");
   };
 
-  const onClickSignout = (e) => {
+  const onClickSignout = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    signOut("google");
+    await signOut({ callbackUrl: "/" });
   };
 
   const getUserInitials = () => {
