@@ -129,23 +129,24 @@ export const ClientForm = ({
     });
   };
 
-  // Enhanced select styles with better visibility
+  // Updated select styles to match InvoiceHeader minimalistic design
   const selectStyles = {
     control: (provided, state) => ({
       ...provided,
-      backgroundColor: "#f9fafb",
-      border: "1px solid #e5e7eb",
-      borderRadius: "0.5rem",
+      backgroundColor: "transparent",
+      border: "none",
+      borderBottom: "1px solid #d1d5db",
+      borderRadius: "0",
       padding: "0.125rem 0",
-      fontSize: "0.875rem",
+      fontSize: "1rem",
       minHeight: "2.5rem",
       boxShadow: "none",
       "&:hover": {
-        borderColor: "#e5e7eb",
+        borderBottomColor: "#9ca3af",
       },
       ...(state.isFocused && {
-        borderColor: "#136db2",
-        boxShadow: "0 0 0 2px rgba(19, 109, 178, 0.2)",
+        borderBottomColor: "var(--text-primary)",
+        boxShadow: "none",
       }),
     }),
     menu: (provided) => ({
@@ -169,24 +170,24 @@ export const ClientForm = ({
       borderRadius: "0.375rem",
       margin: "2px 0",
       backgroundColor: state.isSelected
-        ? "#136db2"
+        ? "var(--text-primary)"
         : state.isFocused
         ? "#f3f4f6"
         : "white",
-      color: state.isSelected ? "white" : "#374151",
+      color: state.isSelected ? "white" : "var(--text-primary)",
       "&:hover": {
-        backgroundColor: state.isSelected ? "#136db2" : "#f3f4f6",
+        backgroundColor: state.isSelected ? "var(--text-primary)" : "#f3f4f6",
       },
     }),
     placeholder: (provided) => ({
       ...provided,
-      color: "#9ca3af",
-      fontSize: "0.875rem",
+      color: "var(--text-muted)",
+      fontSize: "1rem",
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: "#374151",
-      fontSize: "0.875rem",
+      color: "var(--text-primary)",
+      fontSize: "1rem",
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -194,28 +195,22 @@ export const ClientForm = ({
     }),
     dropdownIndicator: (provided) => ({
       ...provided,
-      color: "#9ca3af",
+      color: "var(--text-muted)",
       "&:hover": {
-        color: "#6b7280",
+        color: "var(--text-primary)",
       },
     }),
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden flex-1 w-full">
-      <div className="h-1.5"></div>
-
-      <div className="p-4 sm:p-6">
-        <div className="border-b border-gray-100 pb-2 sm:pb-3 mb-4 sm:mb-6 flex items-center justify-between flex-col gap-3 md:gap-0 md:flex-row">
-          <div className="flex items-center">
-            <div className="bg-gradient-to-r from-violet-100 to-indigo-100 p-1.5 sm:p-2 rounded-lg mr-2 sm:mr-3">
-              <Building size={16} className="text-[#136db2] sm:hidden" />
-              <Building size={18} className="text-[#136db2] hidden sm:block" />
-            </div>
-            <h2 className="text-base sm:text-lg font-medium text-gray-800">
-              Client Information
-            </h2>
-          </div>
+    <div className="max-w-4xl mx-auto bg-white">
+      {/* Client Details Section */}
+      <div className="border-b-2 border-gray-300 pb-6 mb-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-[var(--text-primary)] flex items-center gap-2">
+            <div className="w-2 h-2 bg-[var(--text-primary)] rounded-full"></div>
+            Client Details
+          </h2>
 
           <div className="w-64">
             {isClient && (
@@ -250,212 +245,180 @@ export const ClientForm = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 md:gap-x-6 gap-y-4 sm:gap-y-5">
-          <div className="col-span-1 sm:col-span-2">
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              Business Name
+        <div className="space-y-6">
+          {/* Business Name */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              Business Name:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Building size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                onChange={handleInputChangeClient}
-                name="businessName"
-                value={clientsBillingInfo?.businessName || ""}
-                placeholder="Client Business Name (required)"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="text"
+              onChange={handleInputChangeClient}
+              name="businessName"
+              value={clientsBillingInfo?.businessName || ""}
+              placeholder="Enter client business name"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div>
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              Phone Number
+          {/* Phone Number */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              Phone Number:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Phone size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="tel"
-                onChange={handleInputChangeClient}
-                name="phoneNumber"
-                value={clientsBillingInfo?.phoneNumber || ""}
-                placeholder="Phone Number"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="tel"
+              onChange={handleInputChangeClient}
+              name="phoneNumber"
+              value={clientsBillingInfo?.phoneNumber || ""}
+              placeholder="Enter phone number"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div>
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              Email
+          {/* Email */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              Email:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="email"
-                onChange={handleInputChangeClient}
-                name="email"
-                value={clientsBillingInfo?.email || ""}
-                placeholder="Email (Optional)"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="email"
+              onChange={handleInputChangeClient}
+              name="email"
+              value={clientsBillingInfo?.email || ""}
+              placeholder="Enter email address"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div>
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              Tax Information
+          {/* Tax Information */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              Tax Info:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FileText size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                onChange={handleInputChangeClient}
-                name="tax"
-                value={clientsBillingInfo?.tax || ""}
-                placeholder="Tax Registration Number (optional)"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="text"
+              onChange={handleInputChangeClient}
+              name="tax"
+              value={clientsBillingInfo?.tax || ""}
+              placeholder="Enter tax registration number"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div>
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              PAN
+          {/* PAN */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              PAN:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Hash size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                onChange={handleInputChangeClient}
-                name="pan"
-                value={clientsBillingInfo?.pan || ""}
-                placeholder="PAN (optional)"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="text"
+              onChange={handleInputChangeClient}
+              name="pan"
+              value={clientsBillingInfo?.pan || ""}
+              placeholder="Enter PAN number"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div className="col-span-1 sm:col-span-2">
-            <label className="block mb-1 sm:mb-2 text-z font-medium text-gray-600">
-              Address
+          {/* Address */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              Address:
             </label>
-            <div className="relative">
-              <div className="absolute top-2 sm:top-3 left-3 flex items-start pointer-events-none">
-                <MapPin size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                onChange={handleInputChangeClient}
-                name="address"
-                value={clientsBillingInfo?.address || ""}
-                placeholder="Complete Address (optional)"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="text"
+              onChange={handleInputChangeClient}
+              name="address"
+              value={clientsBillingInfo?.address || ""}
+              placeholder="Enter complete address"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div>
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              City
+          {/* City */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              City:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Map size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                onChange={handleInputChangeClient}
-                name="city"
-                value={clientsBillingInfo?.city || ""}
-                placeholder="City (optional)"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="text"
+              onChange={handleInputChangeClient}
+              name="city"
+              value={clientsBillingInfo?.city || ""}
+              placeholder="Enter city"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div>
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              State
+          {/* State */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              State:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Map size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                onChange={handleInputChangeClient}
-                name="state"
-                value={clientsBillingInfo?.state || ""}
-                placeholder="State (optional)"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="text"
+              onChange={handleInputChangeClient}
+              name="state"
+              value={clientsBillingInfo?.state || ""}
+              placeholder="Enter state"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
 
-          <div>
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              PIN / ZIP Code
+          {/* PIN Code */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              PIN Code:
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Hash size={16} className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                onChange={handleInputChangeClient}
-                name="pinCode"
-                value={clientsBillingInfo?.pinCode || ""}
-                placeholder="PIN / ZIP Code"
-                className="w-full pl-10 py-2 sm:py-2.5 px-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-transparent transition-all text-gray-800 text-sm"
-              />
-            </div>
+            <input
+              type="text"
+              onChange={handleInputChangeClient}
+              name="pinCode"
+              value={clientsBillingInfo?.pinCode || ""}
+              placeholder="Enter PIN code"
+              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
+            />
           </div>
-          <div className="mb-4 sm:mb-6 relative">
-            <label className="block mb-1 sm:mb-2 text-sm font-medium text-gray-600">
-              Country
+
+          {/* Country */}
+          <div className="flex items-center gap-4">
+            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
+              Country:
             </label>
-            {isClient && (
-              <Select
-                instanceId="client-country-select"
-                options={countryList()
-                  .getData()
-                  .map((country) => ({
-                    value: country.label,
-                    label: country.label,
-                  }))}
-                onChange={handleCountrySelect}
-                value={
-                  clientsBillingInfo?.country
-                    ? {
-                        value: clientsBillingInfo.country,
-                        label: clientsBillingInfo.country,
-                      }
-                    : {
-                        value: countryList().getLabel("IN"),
-                        label: countryList().getLabel("IN"),
-                      }
-                }
-                placeholder="Select Country"
-                isSearchable
-                className="react-select-container"
-                classNamePrefix="react-select"
-                styles={selectStyles}
-                menuPortalTarget={document.body}
-                menuPosition="absolute"
-                menuPlacement="auto"
-              />
-            )}
+            <div className="flex-1">
+              {isClient && (
+                <Select
+                  instanceId="client-country-select"
+                  options={countryList()
+                    .getData()
+                    .map((country) => ({
+                      value: country.label,
+                      label: country.label,
+                    }))}
+                  onChange={handleCountrySelect}
+                  value={
+                    clientsBillingInfo?.country
+                      ? {
+                          value: clientsBillingInfo.country,
+                          label: clientsBillingInfo.country,
+                        }
+                      : {
+                          value: countryList().getLabel("IN"),
+                          label: countryList().getLabel("IN"),
+                        }
+                  }
+                  placeholder="Select Country"
+                  isSearchable
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  styles={selectStyles}
+                  menuPortalTarget={document.body}
+                  menuPosition="absolute"
+                  menuPlacement="auto"
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

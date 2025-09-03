@@ -30,7 +30,6 @@ export default function Dashboard() {
       <InvoiceHeader />
       <div className="flex flex-row gap-4">
         <OrganizationForm />
-        <ClientForm />
       </div>
     </main>
   );
