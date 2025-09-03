@@ -2,7 +2,7 @@ import { pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { users } from "./users.js";
 
 export const clients = pgTable("clients", {
-  user_id: text("user_id")
+  userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   id: text("id")

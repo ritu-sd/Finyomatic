@@ -2,6 +2,8 @@
 
 import { useSession } from "next-auth/react";
 import Header from "@/src/app/components/layout/Header";
+import { InvoiceHeader } from "@/src/app/components/invoice/InvoiceHeader";
+import { OrganizationForm } from "@/src/app/components/invoice/OrganizationForm";
 
 export default function Dashboard() {
   const { status } = useSession();
@@ -21,10 +23,5 @@ export default function Dashboard() {
     return null;
   }
 
-  return (
-    <main>
-      <Header />
-      <h1>Dashboard</h1>
-    </main>
-  );
+  return <main></main>;
 }

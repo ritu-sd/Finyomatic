@@ -24,7 +24,7 @@ export const statusEnum = pgEnum("status", [
 ]);
 
 export const invoices = pgTable("invoice", {
-  user_id: text("user_id")
+  userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   id: text("id")

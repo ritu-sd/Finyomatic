@@ -8,3 +8,4 @@ export * from "./session.js";
 export * from "./authenticator.js";
 export * from "./verification.js";
 export * from "./template.js";
+export * from "./bank.js";
