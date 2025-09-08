@@ -17,7 +17,7 @@ export const InvoiceHeader = ({
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto bg-white">
+    <div className="w-full bg-white mt-4">
       {/* Invoice Title */}
       <div className="text-center mb-8">
         <input

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Header from "@/src/app/components/layout/Header";
 import { InvoiceHeader } from "@/src/app/components/invoice/InvoiceHeader";
 import { OrganizationForm } from "@/src/app/components/invoice/OrganizationForm";
-import { ClientForm } from "../../components/invoice/ClientForm";
+import { ClientForm } from "@/src/app/components/invoice/ClientForm";
 
 export default function Dashboard() {
   const { status } = useSession();
@@ -25,11 +25,12 @@ export default function Dashboard() {
   }
 
   return (
-    <main>
+    <main className="max-w-7xl mx-auto">
       <Header />
       <InvoiceHeader />
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row items-center justify-center gap-x-8 mt-4">
         <OrganizationForm />
+        <ClientForm />
       </div>
     </main>
   );

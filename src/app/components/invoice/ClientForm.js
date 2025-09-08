@@ -203,213 +203,45 @@ export const ClientForm = ({
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white">
+    <div className="w-full bg-white">
       {/* Client Details Section */}
-      <div className="border-b-2 border-gray-300 pb-6 mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[var(--text-primary)] flex items-center gap-2">
-            <div className="w-2 h-2 bg-[var(--text-primary)] rounded-full"></div>
-            Client Details
-          </h2>
+      <div className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-xl p-8 shadow-sm">
+        {/* Header */}
+        <div className="flex flex-col justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-[var(--text-primary)] rounded-lg flex items-center justify-center">
+              <Building className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+                Client Details
+              </h2>
+            </div>
+          </div>
 
-          <div className="w-64">
+          <div className="w-full mt-4">
             {isClient && (
-              <Select
-                instanceId="saved-clients-select"
-                options={savedClients.map((client) => ({
-                  value: client.id,
-                  label: client.name,
-                }))}
-                onChange={handleClientSelect}
-                value={
-                  savedClients.find((client) => client.id === selectedClient)
-                    ? {
-                        value: selectedClient,
-                        label: savedClients.find(
-                          (client) => client.id === selectedClient
-                        )?.name,
-                      }
-                    : null
-                }
-                isDisabled={isLoading}
-                placeholder="Select Saved Client"
-                isClearable
-                className="react-select-container"
-                classNamePrefix="react-select"
-                styles={selectStyles}
-                menuPortalTarget={document.body}
-                menuPosition="absolute"
-                menuPlacement="auto"
-              />
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          {/* Business Name */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              Business Name:
-            </label>
-            <input
-              type="text"
-              onChange={handleInputChangeClient}
-              name="businessName"
-              value={clientsBillingInfo?.businessName || ""}
-              placeholder="Enter client business name"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* Phone Number */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              Phone Number:
-            </label>
-            <input
-              type="tel"
-              onChange={handleInputChangeClient}
-              name="phoneNumber"
-              value={clientsBillingInfo?.phoneNumber || ""}
-              placeholder="Enter phone number"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* Email */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              Email:
-            </label>
-            <input
-              type="email"
-              onChange={handleInputChangeClient}
-              name="email"
-              value={clientsBillingInfo?.email || ""}
-              placeholder="Enter email address"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* Tax Information */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              Tax Info:
-            </label>
-            <input
-              type="text"
-              onChange={handleInputChangeClient}
-              name="tax"
-              value={clientsBillingInfo?.tax || ""}
-              placeholder="Enter tax registration number"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* PAN */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              PAN:
-            </label>
-            <input
-              type="text"
-              onChange={handleInputChangeClient}
-              name="pan"
-              value={clientsBillingInfo?.pan || ""}
-              placeholder="Enter PAN number"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* Address */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              Address:
-            </label>
-            <input
-              type="text"
-              onChange={handleInputChangeClient}
-              name="address"
-              value={clientsBillingInfo?.address || ""}
-              placeholder="Enter complete address"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* City */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              City:
-            </label>
-            <input
-              type="text"
-              onChange={handleInputChangeClient}
-              name="city"
-              value={clientsBillingInfo?.city || ""}
-              placeholder="Enter city"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* State */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              State:
-            </label>
-            <input
-              type="text"
-              onChange={handleInputChangeClient}
-              name="state"
-              value={clientsBillingInfo?.state || ""}
-              placeholder="Enter state"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* PIN Code */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              PIN Code:
-            </label>
-            <input
-              type="text"
-              onChange={handleInputChangeClient}
-              name="pinCode"
-              value={clientsBillingInfo?.pinCode || ""}
-              placeholder="Enter PIN code"
-              className="flex-1 text-lg font-semibold text-[var(--text-primary)] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-            />
-          </div>
-
-          {/* Country */}
-          <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-[var(--text-muted)] min-w-24">
-              Country:
-            </label>
-            <div className="flex-1">
-              {isClient && (
+              <div className="relative">
                 <Select
-                  instanceId="client-country-select"
-                  options={countryList()
-                    .getData()
-                    .map((country) => ({
-                      value: country.label,
-                      label: country.label,
-                    }))}
-                  onChange={handleCountrySelect}
+                  instanceId="saved-clients-select"
+                  options={savedClients.map((client) => ({
+                    value: client.id,
+                    label: client.name,
+                  }))}
+                  onChange={handleClientSelect}
                   value={
-                    clientsBillingInfo?.country
+                    savedClients.find((client) => client.id === selectedClient)
                       ? {
-                          value: clientsBillingInfo.country,
-                          label: clientsBillingInfo.country,
+                          value: selectedClient,
+                          label: savedClients.find(
+                            (client) => client.id === selectedClient
+                          )?.name,
                         }
-                      : {
-                          value: countryList().getLabel("IN"),
-                          label: countryList().getLabel("IN"),
-                        }
+                      : null
                   }
-                  placeholder="Select Country"
-                  isSearchable
+                  isDisabled={isLoading}
+                  placeholder="Select from saved clients"
+                  isClearable
                   className="react-select-container"
                   classNamePrefix="react-select"
                   styles={selectStyles}
@@ -417,7 +249,243 @@ export const ClientForm = ({
                   menuPosition="absolute"
                   menuPlacement="auto"
                 />
-              )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Form Fields */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Business Information Section */}
+          <div className="space-y-6">
+            <div className="border-l-4 border-blue-600 pl-4">
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4 flex items-center gap-2">
+                <Building className="w-4 h-4" />
+                Business Information
+              </h3>
+            </div>
+
+            {/* Business Name */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Building className="w-4 h-4" />
+                Business Name
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChangeClient}
+                name="businessName"
+                value={clientsBillingInfo?.businessName || ""}
+                placeholder="Enter client business name"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+
+            {/* Phone Number */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Phone className="w-4 h-4" />
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                onChange={handleInputChangeClient}
+                name="phoneNumber"
+                value={clientsBillingInfo?.phoneNumber || ""}
+                placeholder="Enter phone number"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+
+            {/* Email */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Mail className="w-4 h-4" />
+                Email Address
+              </label>
+              <input
+                type="email"
+                onChange={handleInputChangeClient}
+                name="email"
+                value={clientsBillingInfo?.email || ""}
+                placeholder="Enter email address"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+          </div>
+
+          {/* Tax & Legal Information Section */}
+          <div className="space-y-6">
+            <div className="border-l-4 border-blue-600 pl-4">
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4 flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Tax & Legal Information
+              </h3>
+            </div>
+
+            {/* Tax Information */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Hash className="w-4 h-4" />
+                Tax Registration Number
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChangeClient}
+                name="tax"
+                value={clientsBillingInfo?.tax || ""}
+                placeholder="Enter tax registration number"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+
+            {/* PAN */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <FileText className="w-4 h-4" />
+                PAN Number
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChangeClient}
+                name="pan"
+                value={clientsBillingInfo?.pan || ""}
+                placeholder="Enter PAN number"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Address Information Section */}
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="border-l-4 border-blue-600 pl-4 mb-6">
+            <h3 className="text-lg font-semibold text-[var(--text-primary)] flex items-center gap-2">
+              <MapPin className="w-4 h-4" />
+              Address Information
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Address */}
+            <div className="lg:col-span-2 space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                Complete Address
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChangeClient}
+                name="address"
+                value={clientsBillingInfo?.address || ""}
+                placeholder="Enter complete address"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+
+            {/* City */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Map className="w-4 h-4" />
+                City
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChangeClient}
+                name="city"
+                value={clientsBillingInfo?.city || ""}
+                placeholder="Enter city"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+
+            {/* State */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Map className="w-4 h-4" />
+                State
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChangeClient}
+                name="state"
+                value={clientsBillingInfo?.state || ""}
+                placeholder="Enter state"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+
+            {/* PIN Code */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Hash className="w-4 h-4" />
+                PIN Code
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChangeClient}
+                name="pinCode"
+                value={clientsBillingInfo?.pinCode || ""}
+                placeholder="Enter PIN code"
+                className="w-full px-4 py-3 text-[var(--text-primary)] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+              />
+            </div>
+
+            {/* Country */}
+            <div className="space-y-2">
+              <label className="flex text-sm font-medium text-[var(--text-muted)] items-center gap-2">
+                <Map className="w-4 h-4" />
+                Country
+              </label>
+              <div className="w-full">
+                {isClient && (
+                  <Select
+                    instanceId="client-country-select"
+                    options={countryList()
+                      .getData()
+                      .map((country) => ({
+                        value: country.label,
+                        label: country.label,
+                      }))}
+                    onChange={handleCountrySelect}
+                    value={
+                      clientsBillingInfo?.country
+                        ? {
+                            value: clientsBillingInfo.country,
+                            label: clientsBillingInfo.country,
+                          }
+                        : {
+                            value: countryList().getLabel("IN"),
+                            label: countryList().getLabel("IN"),
+                          }
+                    }
+                    placeholder="Select Country"
+                    isSearchable
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    styles={{
+                      ...selectStyles,
+                      control: (provided, state) => ({
+                        ...selectStyles.control(provided, state),
+                        minHeight: "3rem",
+                        padding: "0.5rem 1rem",
+                        borderRadius: "0.5rem",
+                        border: "1px solid #d1d5db",
+                        "&:hover": {
+                          borderColor: "#9ca3af",
+                        },
+                        ...(state.isFocused && {
+                          borderColor: "#2563eb",
+                          boxShadow: "0 0 0 2px rgba(37, 99, 235, 0.1)",
+                        }),
+                      }),
+                    }}
+                    menuPortalTarget={document.body}
+                    menuPosition="absolute"
+                    menuPlacement="auto"
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>

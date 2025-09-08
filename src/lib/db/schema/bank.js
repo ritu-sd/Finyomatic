@@ -1,11 +1,12 @@
-const {
+import {
   pgTable,
   text,
   primaryKey,
   timestamp,
   bytea,
-} = require("drizzle-orm/pg-core");
-const { users } = require("./user");
+} from "drizzle-orm/pg-core";
+import { users } from "./users";
+
 export const bank = pgTable(
   "bank",
   {
