@@ -27,10 +27,12 @@ export default function Dashboard() {
   return (
     <main className="max-w-7xl mx-auto">
       <Header />
-      <InvoiceHeader />
-      <div className="flex flex-row items-center justify-center gap-x-8 mt-4">
-        <OrganizationForm />
-        <ClientForm />
+      <div className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-xl p-8 shadow-sm mt-4">
+        <InvoiceHeader />
+        <div className="flex flex-row items-center justify-center gap-x-8 mt-4">
+          <OrganizationForm />
+          <ClientForm />
+        </div>
       </div>
     </main>
   );
