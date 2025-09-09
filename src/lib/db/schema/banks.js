@@ -7,8 +7,8 @@ import {
 } from "drizzle-orm/pg-core";
 import { users } from "./users";
 
-export const bank = pgTable(
-  "bank",
+export const banks = pgTable(
+  "banks",
   {
     userId: text("userId")
       .notNull()
