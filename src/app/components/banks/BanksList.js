@@ -26,7 +26,7 @@ export const BanksList = () => {
           queryParams.append("search", searchQuery.trim());
         }
 
-        const response = await fetch(`/api/bank?${queryParams}`);
+        const response = await fetch(`/api/banks?${queryParams}`);
         const data = await response.json();
         if (response.ok && data) {
           setBanks(data.data);
@@ -83,7 +83,7 @@ export const BanksList = () => {
     if (!confirm("Are you sure you want to delete this bank details?")) return;
 
     try {
-      const res = await fetch("/api/bank", {
+      const res = await fetch("/api/banks", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +133,7 @@ export const BanksList = () => {
             queryParams.append("search", debouncedSearchTerm.trim());
           }
 
-          const response = await fetch(`/api/bank?${queryParams}`);
+          const response = await fetch(`/api/banks?${queryParams}`);
           const data = await response.json();
 
           if (response.ok && data) {

@@ -77,7 +77,7 @@ export const BanksModal = ({
         requestBody.id = existingBank.id;
       }
 
-      const response = await fetch("/api/bank", {
+      const response = await fetch("/api/banks", {
         method: mode === "add" ? "POST" : "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,13 @@ export const BanksModal = ({
         onSuccess();
         onClose();
       } else {
-        const errorData = await response.json();
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch (jsonError) {
+          console.error("Failed to parse error response:", jsonError);
+          errorData = { error: "Server error occurred" };
+        }
 
         if (response.status === 409) {
           toast.error(errorData.error || "Account Number already exists");
@@ -107,6 +113,8 @@ export const BanksModal = ({
     } catch (error) {
       console.error("Error saving bank details:", error);
       toast.error("Failed to save bank details");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
