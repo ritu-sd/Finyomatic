@@ -28,7 +28,6 @@ export const InvoiceHeader = ({
 
   return (
     <>
-      <Title />
       <div className="w-full">
         {/* Invoice Header Section */}
         <div className="mb-12">

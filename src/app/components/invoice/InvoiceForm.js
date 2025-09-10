@@ -6,6 +6,9 @@ import { OrganizationForm } from "@/src/app/components/invoice/OrganizationForm"
 import { ClientForm } from "@/src/app/components/invoice/ClientForm";
 import { ToastContainer } from "react-toastify";
 import { InvoiceHeader } from "./InvoiceHeader";
+import { Title } from "./Title";
+import { TaxModal } from "./TaxModal";
+import { CurrencySelector } from "./CurrencySelector";
 
 // Function to determine invoice type and labels based on pathname
 const getInvoiceTitle = (pathname) => {
@@ -96,6 +99,10 @@ export const InvoiceForm = () => {
       ...invoiceData,
       customFields: updatedFields,
     });
+  };
+  const [currency, setCurrency] = useState("INR");
+  const handleCurrencyChange = (e) => {
+    setCurrency(e.target.value);
   };
 
   useEffect(() => {
@@ -190,10 +197,18 @@ export const InvoiceForm = () => {
     }
   }, [searchParams]);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const handleOpenModal = () => {
+    setModalIsOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 bg-white shadow-lg rounded-lg mt-5">
       <ToastContainer />
-
+      <Title />
       <InvoiceHeader
         handleInvoiceChange={handleInvoiceChange}
         invoiceData={invoiceData}
@@ -205,6 +220,23 @@ export const InvoiceForm = () => {
       <div className="flex flex-row items-center justify-center gap-x-8 mt-4">
         <OrganizationForm />
         <ClientForm />
+      </div>
+      <div className="flex flex-row gap-4 mt-6 ">
+        <div>
+          <TaxModal
+            modalIsOpen={modalIsOpen}
+            handleCloseModal={handleCloseModal}
+          />
+          <button
+            onClick={handleOpenModal}
+            className="px-3 sm:px-8 py-2.5 rounded-xl text-[#0a3a5f] hover:text-[#0e5389] border-2 border-[#379cea]/20 hover:border-[#379cea]/40 hover:bg-[#379cea]/10 transition-all duration-200 shadow-sm font-medium w-full sm:w-auto"
+          >
+            Tax Details
+          </button>
+        </div>
+        <div className="w-full sm:w-auto">
+          <CurrencySelector handleCurrencyChange={handleCurrencyChange} />
+        </div>
       </div>
     </div>
   );

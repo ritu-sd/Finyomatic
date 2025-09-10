@@ -12,6 +12,7 @@
     "@auth/drizzle-adapter": "^1.10.0",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^3.0.2",
+    "currency-symbol-map": "^5.1.0",
     "dotenv": "^16.6.1",
     "drizzle-orm": "^0.44.4",
     "lucide-react": "^0.542.0",
