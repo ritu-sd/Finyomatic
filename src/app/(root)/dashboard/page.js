@@ -2,9 +2,8 @@
 
 import { useSession } from "next-auth/react";
 import Header from "@/src/app/components/layout/Header";
-import { InvoiceHeader } from "@/src/app/components/invoice/InvoiceHeader";
-import { OrganizationForm } from "@/src/app/components/invoice/OrganizationForm";
-import { ClientForm } from "@/src/app/components/invoice/ClientForm";
+
+import { InvoiceForm } from "../../components/invoice/InvoiceForm";
 
 export default function Dashboard() {
   const { status } = useSession();
@@ -28,11 +27,7 @@ export default function Dashboard() {
     <main className="max-w-7xl mx-auto">
       <Header />
       <div className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-xl p-8 shadow-sm mt-4">
-        <InvoiceHeader />
-        <div className="flex flex-row items-center justify-center gap-x-8 mt-4">
-          <OrganizationForm />
-          <ClientForm />
-        </div>
+        <InvoiceForm />
       </div>
     </main>
   );
