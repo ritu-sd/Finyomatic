@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams, usePathname } from "next/navigation";
+import countryList from "react-select-country-list";
 import { OrganizationForm } from "@/src/app/components/invoice/OrganizationForm";
 import { ClientForm } from "@/src/app/components/invoice/ClientForm";
 import { ToastContainer } from "react-toastify";
@@ -52,7 +53,7 @@ export const InvoiceForm = () => {
     signature: null,
   });
 
-  const [clientsBillingInfo, setClientsBillingInfo] = useState({
+  const [clientInfo, setClientInfo] = useState({
     country: countryList().getLabel("IN"),
     businessName: "",
     phoneNumber: "",
