@@ -9,6 +9,7 @@ import { InvoiceHeader } from "./InvoiceHeader";
 import { Title } from "./Title";
 import { TaxModal } from "./TaxModal";
 import { CurrencySelector } from "./CurrencySelector";
+import { BankDetailsForm } from "./BankDetailsForm";
 
 // Function to determine invoice type and labels based on pathname
 const getInvoiceTitle = (pathname) => {
@@ -221,6 +222,7 @@ export const InvoiceForm = () => {
         <OrganizationForm />
         <ClientForm />
       </div>
+      <BankDetailsForm />
       <div className="flex flex-row gap-4 mt-6 ">
         <div>
           <TaxModal
