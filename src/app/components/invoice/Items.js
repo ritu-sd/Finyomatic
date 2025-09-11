@@ -139,7 +139,7 @@ export const Items = ({
       {/* Items Table Header - Hidden on Mobile */}
 
       <div
-        className={`hidden sm:grid bg-gradient-to-r from-[#0a3a5f] to-[#136db2] ${gridConfig.gridClass} px-4 sm:px-6 py-4 rounded-t-xl text-white font-medium shadow-md`}
+        className={`hidden sm:grid bg-gradient-to-r from-black to-gray-800 ${gridConfig.gridClass} px-4 sm:px-6 py-4 rounded-t-xl text-white font-medium shadow-md`}
       >
         <p
           className={`${gridConfig.descriptionClass} text-xs sm:text-sm font-semibold tracking-wide`}
@@ -224,7 +224,7 @@ export const Items = ({
       </div>
 
       {/* Mobile Table Header */}
-      <div className="sm:hidden bg-gradient-to-r from-[#0a3a5f] to-[#136db2] px-4 py-3 rounded-t-xl text-white font-medium shadow-md">
+      <div className="sm:hidden bg-gradient-to-r from-black to-gray-800 px-4 py-3 rounded-t-xl text-white font-medium shadow-md">
         <p className="text-sm font-semibold tracking-wide text-center">
           ITEM DETAILS
         </p>
@@ -237,14 +237,14 @@ export const Items = ({
             key={item.id}
             className={`sm:grid ${
               gridConfig.gridClass
-            } px-4 sm:px-6 py-4 items-center hover:bg-[#379cea]/5 transition-colors duration-150 ${
+            } px-4 sm:px-6 py-4 items-center hover:bg-gray-50 transition-colors duration-150 ${
               index !== items.length - 1 ? "border-b border-gray-100" : ""
             }`}
           >
             {/* Mobile Layout */}
             <div className="sm:hidden space-y-3">
               <div className="w-full">
-                <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                <label className="block text-xs font-medium text-black mb-1">
                   ITEM DESCRIPTION
                 </label>
                 <input
@@ -254,13 +254,13 @@ export const Items = ({
                     handleChange(item.id, "name", e.target.value)
                   }
                   placeholder="Item description"
-                  className="w-full focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                  <label className="block text-xs font-medium text-black mb-1">
                     QUANTITY
                   </label>
                   <input
@@ -270,11 +270,11 @@ export const Items = ({
                       handleChange(item.id, "quantity", e.target.value)
                     }
                     placeholder="0"
-                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                  <label className="block text-xs font-medium text-black mb-1">
                     RATE
                   </label>
                   <input
@@ -284,14 +284,14 @@ export const Items = ({
                       handleChange(item.id, "rate", e.target.value)
                     }
                     placeholder="0.00"
-                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                  <label className="block text-xs font-medium text-black mb-1">
                     AMOUNT
                   </label>
-                  <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                  <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                     {getSymbolFromCurrency(currency)}
                     {item.amount || "0.00"}
                   </div>
@@ -302,7 +302,7 @@ export const Items = ({
               {selectedTaxType === "tax" && (
                 <div className="grid grid-cols-3 gap-2">
                   <div>
-                    <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                    <label className="block text-xs font-medium text-black mb-1">
                       TAX RATE (%)
                     </label>
                     <input
@@ -313,14 +313,14 @@ export const Items = ({
                         handleItemTaxChange(item.id, "taxRate", e.target.value)
                       }
                       placeholder="0"
-                      className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                      className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                    <label className="block text-xs font-medium text-black mb-1">
                       TAX AMOUNT
                     </label>
-                    <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                    <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                       {getSymbolFromCurrency(currency)}
                       {(
                         ((parseFloat(item.amount) || 0) *
@@ -330,10 +330,10 @@ export const Items = ({
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                    <label className="block text-xs font-medium text-black mb-1">
                       TOTAL AMOUNT
                     </label>
-                    <div className="w-full text-center bg-[#379cea]/10 border border-[#379cea]/20 px-3 py-2 rounded-lg text-[#0a3a5f] font-bold">
+                    <div className="w-full text-center bg-gray-100 border border-gray-300 px-3 py-2 rounded-lg text-black font-bold">
                       {getSymbolFromCurrency(currency)}
                       {(
                         (parseFloat(item.amount) || 0) +
@@ -351,7 +351,7 @@ export const Items = ({
                 <>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                      <label className="block text-xs font-medium text-black mb-1">
                         GST RATE (%)
                       </label>
                       <input
@@ -366,14 +366,14 @@ export const Items = ({
                           )
                         }
                         placeholder="0"
-                        className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                        className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                      <label className="block text-xs font-medium text-black mb-1">
                         TOTAL AMOUNT
                       </label>
-                      <div className="w-full text-center bg-[#379cea]/10 border border-[#379cea]/20 px-3 py-2 rounded-lg text-[#0a3a5f] font-bold">
+                      <div className="w-full text-center bg-gray-100 border border-gray-300 px-3 py-2 rounded-lg text-black font-bold">
                         {getSymbolFromCurrency(currency)}
                         {(
                           (parseFloat(item.amount) || 0) +
@@ -389,10 +389,10 @@ export const Items = ({
                   {gstType === "igst" && (
                     <div className="grid grid-cols-1 gap-2">
                       <div>
-                        <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                        <label className="block text-xs font-medium text-black mb-1">
                           IGST
                         </label>
-                        <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                        <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                           {getSymbolFromCurrency(currency)}
                           {(
                             ((parseFloat(item.amount) || 0) *
@@ -407,10 +407,10 @@ export const Items = ({
                   {gstType === "cgst_sgst" && (
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                        <label className="block text-xs font-medium text-black mb-1">
                           CGST
                         </label>
-                        <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                        <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                           {getSymbolFromCurrency(currency)}
                           {(
                             ((parseFloat(item.amount) || 0) *
@@ -420,10 +420,10 @@ export const Items = ({
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#0e5389] mb-1">
+                        <label className="block text-xs font-medium text-black mb-1">
                           SGST
                         </label>
-                        <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                        <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                           {getSymbolFromCurrency(currency)}
                           {(
                             ((parseFloat(item.amount) || 0) *
@@ -468,7 +468,7 @@ export const Items = ({
                 value={item.name}
                 onChange={(e) => handleChange(item.id, "name", e.target.value)}
                 placeholder="Item description"
-                className="w-full focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                className="w-full focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
               />
             </div>
             <div className={`hidden sm:block ${gridConfig.quantityClass} px-1`}>
@@ -479,7 +479,7 @@ export const Items = ({
                   handleChange(item.id, "quantity", e.target.value)
                 }
                 placeholder="0"
-                className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
               />
             </div>
             <div className={`hidden sm:block ${gridConfig.rateClass} px-1`}>
@@ -488,11 +488,11 @@ export const Items = ({
                 value={item.rate}
                 onChange={(e) => handleChange(item.id, "rate", e.target.value)}
                 placeholder="0.00"
-                className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
               />
             </div>
             <div className={`hidden sm:block ${gridConfig.amountClass} px-1`}>
-              <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+              <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                 {getSymbolFromCurrency(currency)}
                 {item.amount || "0.00"}
               </div>
@@ -512,13 +512,13 @@ export const Items = ({
                       handleItemTaxChange(item.id, "taxRate", e.target.value)
                     }
                     placeholder="0"
-                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
                   />
                 </div>
                 <div
                   className={`hidden sm:block ${gridConfig.taxAmountClass} px-1`}
                 >
-                  <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                  <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                     {getSymbolFromCurrency(currency)}
                     {(
                       ((parseFloat(item.amount) || 0) *
@@ -530,7 +530,7 @@ export const Items = ({
                 <div
                   className={`hidden sm:block ${gridConfig.totalAmountClass} px-1`}
                 >
-                  <div className="w-full text-center bg-[#379cea]/10 border border-[#379cea]/20 px-3 py-2 rounded-lg text-[#0a3a5f] font-bold">
+                  <div className="w-full text-center bg-gray-100 border border-gray-300 px-3 py-2 rounded-lg text-black font-bold">
                     {getSymbolFromCurrency(currency)}
                     {(
                       (parseFloat(item.amount) || 0) +
@@ -557,14 +557,14 @@ export const Items = ({
                       handleItemTaxChange(item.id, "gstRate", e.target.value)
                     }
                     placeholder="0"
-                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-[#136db2] px-3 py-2 rounded-lg border border-gray-200 text-[#0a3a5f]"
+                    className="w-full text-center focus:outline-none focus:ring-2 focus:ring-black px-3 py-2 rounded-lg border border-gray-200 text-black"
                   />
                 </div>
                 {gstType === "igst" && (
                   <div
                     className={`hidden sm:block ${gridConfig.igstClass} px-1`}
                   >
-                    <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                    <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                       {getSymbolFromCurrency(currency)}
                       {(
                         ((parseFloat(item.amount) || 0) *
@@ -579,7 +579,7 @@ export const Items = ({
                     <div
                       className={`hidden sm:block ${gridConfig.cgstClass} px-1`}
                     >
-                      <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                      <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                         {getSymbolFromCurrency(currency)}
                         {(
                           ((parseFloat(item.amount) || 0) *
@@ -591,7 +591,7 @@ export const Items = ({
                     <div
                       className={`hidden sm:block ${gridConfig.sgstClass} px-1`}
                     >
-                      <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-[#0a3a5f] font-medium">
+                      <div className="w-full text-center bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-black font-medium">
                         {getSymbolFromCurrency(currency)}
                         {(
                           ((parseFloat(item.amount) || 0) *
@@ -605,7 +605,7 @@ export const Items = ({
                 <div
                   className={`hidden sm:block ${gridConfig.totalAmountClass} px-1`}
                 >
-                  <div className="w-full text-center bg-[#379cea]/10 border border-[#379cea]/20 px-3 py-2 rounded-lg text-[#0a3a5f] font-bold">
+                  <div className="w-full text-center bg-gray-100 border border-gray-300 px-3 py-2 rounded-lg text-black font-bold">
                     {getSymbolFromCurrency(currency)}
                     {(
                       (parseFloat(item.amount) || 0) +
@@ -649,7 +649,7 @@ export const Items = ({
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full md:w-auto">
           <button
             onClick={addItem}
-            className="flex items-center justify-center text-[#0a3a5f] hover:text-[#0e5389] px-4 sm:px-5 py-2 rounded-xl border-2 border-[#379cea]/20 hover:border-[#379cea]/40 hover:bg-[#379cea]/10 transition-all duration-200 shadow-sm w-full font-medium"
+            className="flex items-center justify-center text-black hover:text-gray-700 px-4 sm:px-5 py-2 rounded-xl border-2 border-gray-300 hover:border-gray-500 hover:bg-gray-100 transition-all duration-200 shadow-sm w-full font-medium"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -675,8 +675,8 @@ export const Items = ({
               className={`flex items-center justify-between w-full px-4 sm:px-5 py-3 text-sm font-medium rounded-xl border-2 transition-all duration-200
                 ${
                   discountHidden
-                    ? "bg-[#379cea]/10 text-[#0a3a5f] border-[#379cea]/30 hover:bg-[#379cea]/20"
-                    : "bg-white text-[#0e5389] border-[#379cea]/20 hover:bg-[#379cea]/10"
+                    ? "bg-gray-100 text-black border-gray-300 hover:bg-gray-200"
+                    : "bg-white text-black border-gray-300 hover:bg-gray-50"
                 }`}
             >
               <div className="flex items-center gap-2">
@@ -717,7 +717,7 @@ export const Items = ({
                   placeholder={`Enter discount ${
                     discountType === "percentage" ? "percentage" : "amount"
                   }`}
-                  className="flex-1 bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#136db2] focus:border-[#136db2] transition-all"
+                  className="flex-1 bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all"
                   min="0"
                   max={discountType === "percentage" ? "100" : undefined}
                   value={discount || ""}
@@ -760,7 +760,7 @@ export const Items = ({
           {/* Totals Section */}
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-4 sm:p-5 rounded-xl shadow-md border border-gray-200 w-full">
             <div className="flex flex-col space-y-3">
-              <div className="flex justify-between text-[#0e5389]">
+              <div className="flex justify-between text-black">
                 <span>Subtotal:</span>
                 <span className="font-medium">
                   {getSymbolFromCurrency(currency)}
@@ -769,7 +769,7 @@ export const Items = ({
               </div>
 
               {discountHidden && discount > 0 && (
-                <div className="flex justify-between text-[#0e5389]">
+                <div className="flex justify-between text-black">
                   <span>
                     Discount
                     {discountType === "percentage" ? ` (${discount}%)` : ""}:
@@ -781,9 +781,9 @@ export const Items = ({
                 </div>
               )}
 
-              <div className="flex justify-between text-[#0a3a5f] font-semibold text-lg pt-3 mt-1 border-t border-gray-200">
+              <div className="flex justify-between text-black font-semibold text-lg pt-3 mt-1 border-t border-gray-200">
                 <span>Total:</span>
-                <span className="text-[#0a3a5f]">
+                <span className="text-black">
                   {getSymbolFromCurrency(currency)}
                   {totals.total.toFixed(2)}
                 </span>
