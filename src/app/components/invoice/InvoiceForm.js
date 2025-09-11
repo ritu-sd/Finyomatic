@@ -4,12 +4,13 @@ import { useSearchParams, usePathname } from "next/navigation";
 import countryList from "react-select-country-list";
 import { OrganizationForm } from "@/src/app/components/invoice/OrganizationForm";
 import { ClientForm } from "@/src/app/components/invoice/ClientForm";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { InvoiceHeader } from "./InvoiceHeader";
 import { Title } from "./Title";
 import { TaxModal } from "./TaxModal";
 import { CurrencySelector } from "./CurrencySelector";
 import { BankDetailsForm } from "./BankDetailsForm";
+import { Items } from "./Items";
 
 // Function to determine invoice type and labels based on pathname
 const getInvoiceTitle = (pathname) => {
@@ -106,6 +107,68 @@ export const InvoiceForm = () => {
     setCurrency(e.target.value);
   };
 
+  // Items state
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      name: "",
+      quantity: 1,
+      rate: 0,
+      amount: 0,
+      taxRate: 0,
+      gstRate: 0,
+    },
+  ]);
+
+  // Tax configuration state
+  const [selectedTaxType, setSelectedTaxType] = useState("none");
+  const [gstType, setGstType] = useState("cgst_sgst");
+
+  // Discount state
+  const [discount, setDiscount] = useState(0);
+  const [discountType, setDiscountType] = useState("percentage");
+  const [discountHidden, setDiscountHidden] = useState(false);
+
+  // Bank details state
+  const [bankDetails, setBankDetails] = useState({
+    bankName: "",
+    accountName: "",
+    accountNumber: "",
+    ifscCode: "",
+  });
+
+  // Logo state
+  const [logo, setLogo] = useState(null);
+
+  // User billing info state
+  const [usersBillingInfo, setUsersBillingInfo] = useState({
+    businessName: "",
+    phoneNumber: "",
+    email: "",
+    country: countryList().getLabel("IN"),
+    state: "",
+    city: "",
+    address: "",
+    pinCode: "",
+    tax: "",
+    pan: "",
+    signature: null,
+  });
+
+  // Client billing info state
+  const [clientsBillingInfo, setClientsBillingInfo] = useState({
+    businessName: "",
+    phoneNumber: "",
+    email: "",
+    country: countryList().getLabel("IN"),
+    state: "",
+    city: "",
+    address: "",
+    pinCode: "",
+    tax: "",
+    pan: "",
+  });
+
   useEffect(() => {
     const copyId = searchParams.get("copyId");
     if (copyId) {
@@ -198,6 +261,101 @@ export const InvoiceForm = () => {
     }
   }, [searchParams]);
 
+  // Items handlers
+  const handleItemChange = (itemId, field, value) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.id === itemId) {
+          const updatedItem = { ...item, [field]: value };
+          // Calculate amount when quantity or rate changes
+          if (field === "quantity" || field === "rate") {
+            updatedItem.amount =
+              parseFloat(updatedItem.quantity) * parseFloat(updatedItem.rate);
+          }
+          return updatedItem;
+        }
+        return item;
+      })
+    );
+  };
+
+  const addItem = () => {
+    const newId = Math.max(...items.map((item) => item.id), 0) + 1;
+    setItems((prevItems) => [
+      ...prevItems,
+      {
+        id: newId,
+        name: "",
+        quantity: 1,
+        rate: 0,
+        amount: 0,
+        taxRate: 0,
+        gstRate: 0,
+      },
+    ]);
+  };
+
+  const removeItem = (itemId) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  };
+
+  // Tax handlers
+  const handleItemTaxChange = (itemId, field, value) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.id === itemId) {
+          return { ...item, [field]: value };
+        }
+        return item;
+      })
+    );
+  };
+
+  const handleTaxConfigChange = (taxType, gstType) => {
+    setSelectedTaxType(taxType);
+    setGstType(gstType);
+  };
+
+  // Discount handlers
+  const handleDiscountChange = (value) => {
+    setDiscount(parseFloat(value) || 0);
+  };
+
+  const handleDiscountTypeChange = (type) => {
+    setDiscountType(type);
+  };
+
+  const handleDiscountBtn = () => {
+    setDiscountHidden(!discountHidden);
+  };
+
+  // Calculate totals
+  const totals = {
+    subtotal: items.reduce(
+      (sum, item) => sum + (parseFloat(item.amount) || 0),
+      0
+    ),
+    discountAmount:
+      discountType === "percentage"
+        ? (items.reduce(
+            (sum, item) => sum + (parseFloat(item.amount) || 0),
+            0
+          ) *
+            discount) /
+          100
+        : discount,
+    total:
+      items.reduce((sum, item) => sum + (parseFloat(item.amount) || 0), 0) -
+      (discountType === "percentage"
+        ? (items.reduce(
+            (sum, item) => sum + (parseFloat(item.amount) || 0),
+            0
+          ) *
+            discount) /
+          100
+        : discount),
+  };
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const handleOpenModal = () => {
     setModalIsOpen(true);
@@ -209,7 +367,10 @@ export const InvoiceForm = () => {
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 bg-white shadow-lg rounded-lg mt-5">
       <ToastContainer />
-      <Title />
+      <Title
+        invoiceData={invoiceData}
+        handleInvoiceChange={handleInvoiceChange}
+      />
       <InvoiceHeader
         handleInvoiceChange={handleInvoiceChange}
         invoiceData={invoiceData}
@@ -240,6 +401,25 @@ export const InvoiceForm = () => {
           <CurrencySelector handleCurrencyChange={handleCurrencyChange} />
         </div>
       </div>
+      <Items
+        items={items}
+        handleChange={handleItemChange}
+        removeItem={removeItem}
+        addItem={addItem}
+        discount={discount}
+        discountType={discountType}
+        discountHidden={discountHidden}
+        handleDiscountChange={handleDiscountChange}
+        handleDiscountTypeChange={handleDiscountTypeChange}
+        handleDiscountBtn={handleDiscountBtn}
+        totals={totals}
+        currency={currency}
+        handleCurrencyChange={handleCurrencyChange}
+        selectedTaxType={selectedTaxType}
+        gstType={gstType}
+        handleItemTaxChange={handleItemTaxChange}
+        handleTaxConfigChange={handleTaxConfigChange}
+      />
     </div>
   );
 };
